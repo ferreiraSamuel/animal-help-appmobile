@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Dimensions, Text, StatusBar } from "react-native";
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { RectButton } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import mapMarker from "../images/map-marker.png";
 
@@ -20,11 +20,11 @@ export default function MapScreen() {
   const [ongs, setOngs] = useState<Ong[]>([]);
   const navigation = useNavigation();
   
-  useEffect(() => {
+  useFocusEffect(() => {
     api.get('ongs').then(response  => {
       setOngs(response.data)
     })
-  }, [])
+  })
 
   function handleNavigateToDetailOng(id: number) {
     navigation.navigate("OngDetails", { id });
